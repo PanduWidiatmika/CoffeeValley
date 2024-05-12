@@ -12,7 +12,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const username = sessionStorage.getItem("username");
 
     if (username !== null) {
-      router.push("/users");
+      router.push("/home");
     }
   }, []);
 

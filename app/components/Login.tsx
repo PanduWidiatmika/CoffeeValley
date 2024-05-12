@@ -28,7 +28,7 @@ const Login: React.FC<LoginProps> = () => {
         autoClose: 3000,
         closeButton: true,
       });
-      router.push("/users");
+      router.push("/home");
     } else {
       console.log("Login failed.");
       toast.warn("Credentials incorrect!", {

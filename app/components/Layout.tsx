@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppBar, Toolbar, Typography, Button, Link as MuiLink, Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import CoffeeIcon from "@mui/icons-material/Coffee";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,11 +10,23 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const today = new Date().toDateString();
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.sessionStorage) {
+      const username = sessionStorage.getItem("username");
+      if (!username) {
+        router.push("/login");
+      }
+    }
+  }, []);
+
   return (
     <div className="layout-container">
       <AppBar position="static">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
+            <CoffeeIcon sx={{ fontSize: "30px", color: "white" }} />
             Coffee Valley
           </Typography>
           <Button sx={{ color: "white", display: { xs: "flex", md: "none" } }} onClick={() => (window.location.href = "/")}>
