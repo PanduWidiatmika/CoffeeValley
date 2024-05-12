@@ -21,3 +21,10 @@ export type Distributor = {
   phone: string;
   email: string;
 };
+
+export type Upload = {
+  id: number;
+  title: string;
+  docPath: string;
+  author: string;
+};

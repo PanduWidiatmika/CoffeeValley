@@ -9,7 +9,6 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const today = new Date().toDateString();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +19,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       }
     }
   }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("username");
+
+    router.push("/login");
+  };
 
   return (
     <div className="layout-container">
@@ -47,9 +52,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <MuiLink underline="none" color="inherit" href="/upload">
             Upload
           </MuiLink>
-          <MuiLink underline="none" color="inherit" href="/">
+          <Button variant="text" color="inherit" onClick={handleLogout}>
             Logout
-          </MuiLink>
+          </Button>
         </Toolbar>
       </AppBar>
 

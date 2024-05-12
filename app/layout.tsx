@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme"; // Import your theme if created
+import theme from "./theme";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (

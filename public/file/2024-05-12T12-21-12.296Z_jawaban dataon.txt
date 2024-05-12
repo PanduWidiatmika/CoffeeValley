@@ -1,0 +1,84 @@
+CREATE TABLE Employee (
+  Employee_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  Employee_Name VARCHAR(255) NOT NULL,
+  Birth_Place_ID VARCHAR(2) NOT NULL,
+  Birth_Place VARCHAR(255) NOT NULL,
+  Date_Of_Birth DateTime NOT NULL,
+  Employee_Address VARCHAR(255) NOT NULL,
+  Employee_Phone VARCHAR(20) NOT NULL,
+  Employee_Gender VARCHAR(1) NOT NULL,
+  Position_ID VARCHAR(3) NOT NULL,
+  Position_Name VARCHAR(255) NOT NULL,
+  FOREIGN KEY (Employee_id) REFERENCES Attendance(Employee_id)
+);
+
+
+CREATE TABLE Attendance (
+  Employee_id INTEGER,
+  Attendance_Date DateTime NOT NULL,
+  Start_Time Time NOT NULL,
+  End_Time Time NOT NULL,
+  Attendance_ID VARCHAR(3) NOT NULL,
+  Attendance_Status VARCHAR(10) NOT NULL,
+  PRIMARY KEY (Attendance_ID),
+  FOREIGN KEY (Employee_id) REFERENCES Employee(Employee_id)
+)
+
+INSERT INTO Employee (Employee_Name, Birth_Place_ID, Birth_Place, Date_Of_Birth, Employee_Address, Employee_Phone, Employee_Gender, Position_ID, Position_Name)
+VALUES
+  ('Samuel Wildwood', 'MY', 'Malaysia', '1975-04-20 00:00:00', 'Jl. Kebayoran Lama No.123', '021-8758814', 'M', 'SWD', 'Software Developer'),
+  ('Pearl Stefany', 'ID', 'Indonesia', '1984-01-02 00:00:00', 'Jl. Arteri Iskandar Muda No.224', '021-5491240', 'F', 'PRM', 'Project Manager'),
+  ('Avril Johnson', 'ID', 'Indonesia', '1985-09-11 00:00:00', 'Kav. DKI Blok 155 No.66', '021-5100891', 'F', 'QAR', 'Quality Assurance'),
+  ('Brian Dempsey', 'TH', 'Thailand', '1970-10-28 00:00:00', 'Komplek Perumahan Meruya Blok 11 No. 90', '021-7551345', 'M', 'SWD', 'Software Developer'),
+  ('Gerard Anthony', 'GE', 'Germany', '1973-07-19 00:00:00', 'Apartemen Mediterania 2 Tower H 10EA', '021-6459756', 'M', 'DIR', 'Director'),
+  ('Yossi Jackson', 'MY', 'Malaysia', '1978-02-12 00:00:00', 'Komplek Puri Indah Blok 121 No. 55', '021-5484590', 'M', 'CEO', 'Chief Executive Officer');
+
+INSERT INTO Attendance (Employee_id, Attendance_Date, Start_Time, End_Time, Attendance_ID, Attendance_Status)
+VALUES
+  (1, '2011-12-11 00:00:00', '00:00', '00:00', 'SWC', 'Sick'),
+  (1, '2011-12-12 00:00:00', '08:04', '17:55', 'PRS', 'Present'),
+  (2, '2011-12-11 00:00:00', '08:00', '18:07', 'PRS', 'Present'),
+  (2, '2011-12-12 00:00:00', '07:50', '17:45', 'PRS', 'Present'),
+  (3, '2011-12-11 00:00:00', '07:54', '18:11', 'PRS', 'Present'),
+  (3, '2011-12-12 00:00:00', '00:00', '00:00', 'ABS', 'Absent'),
+  (4, '2011-12-11 00:00:00', '00:00', '00:00', 'LVE', 'Leave'),
+  (4, '2011-12-12 00:00:00', '00:00', '00:00', 'LVE', 'Leave'),
+  (5, '2011-12-11 00:00:00', '07:58', '17:14', 'PRS', 'Present'),
+  (5, '2011-12-12 00:00:00', '08:00', '18:29', 'PRS', 'Present'),
+  (6, '2011-12-11 00:00:00', '07:53', '17:30', 'PRS', 'Present'),
+  (6, '2011-12-12 00:00:00', '07:59', '18:23', 'PRS', 'Present'),
+
+SELECT 
+  CONCAT('EMP000', Employee_id) AS Employee_ID,
+  *
+FROM Employee;
+
+SELECT 
+  CONCAT('EMP000', Employee_id) AS Employee_ID,
+  *
+FROM Attendance;
+
+ALTER TABLE Employee
+ADD COLUMN status_karyawan VARCHAR(20) DEFAULT 'Active';
+
+SELECT 
+  e.Employee_Name,
+  e.Employee_Gender,
+  e.Position_Name,
+  a.Attendance_Status
+FROM Employee e
+JOIN Attendance a ON e.Employee_id = a.Employee_id
+WHERE a.Attendance_Status != 'Present'
+AND a.Attendance_Date = '2011-12-11';
+
+result = ', '.join(str(i) for i in range(1, 11))
+print(result)
+ 
+result = ', '.join(str(i) for i in range(1, 11))
+print(result)
+
+result = ', '.join('x' * i for i in range(1, 6))
+print(result)
+
+
+
